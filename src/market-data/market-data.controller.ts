@@ -9,6 +9,7 @@ import {
   Query,
   UsePipes,
   ValidationPipe,
+  UseFilters,
 } from '@nestjs/common';
 import { MarketDataService } from './market-data.service';
 import { BinanceService } from 'src/binance/binance.service';
