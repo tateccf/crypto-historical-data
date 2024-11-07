@@ -19,7 +19,6 @@ export class BinanceService {
       params: { symbol, interval: '1d', startTime, endTime },
     });
 
-    console.log(response);
     return response.data;
   }
 }
