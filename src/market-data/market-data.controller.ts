@@ -30,5 +30,7 @@ export class MarketDataController {
       await this.binanceService.fetchHistoricalData(symbol, startTime, endTime);
 
     const analysis = this.marketDataService.getPriceAnalysis(data);
+
+    return analysis;
   }
 }
