@@ -7,9 +7,12 @@ import {
   Param,
   Delete,
   Query,
+  UsePipes,
+  ValidationPipe,
 } from '@nestjs/common';
 import { MarketDataService } from './market-data.service';
 import { BinanceService } from 'src/binance/binance.service';
+import { GetHistorialDataDto } from './dto/get-historical-data.dto';
 
 @Controller('market-data')
 export class MarketDataController {
@@ -19,19 +22,13 @@ export class MarketDataController {
   ) {}
 
   @Get('historical')
-  async getHistoricalData(
-    @Query('symbol') symbol: string,
-    @Query('interval') interval: string,
-    @Query('startTime') startTime: string,
-    @Query('endTime') endTime: string,
-  ) {
-    const data = await this.binanceService.fetchHistoricalData(
-      symbol,
-      interval,
-      startTime,
-      endTime,
-    );
+  @UsePipes(new ValidationPipe())
+  async getHistoricalData(@Query() query: GetHistorialDataDto) {
+    const { symbol, startTime, endTime } = query;
 
-    return data;
+    const data: [number, string][] =
+      await this.binanceService.fetchHistoricalData(symbol, startTime, endTime);
+
+    const analysis = this.marketDataService.getPriceAnalysis(data);
   }
 }

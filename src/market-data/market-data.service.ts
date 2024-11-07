@@ -1,26 +1,16 @@
 import { Injectable } from '@nestjs/common';
-import { CreateMarketDatumDto } from './dto/create-market-datum.dto';
-import { UpdateMarketDatumDto } from './dto/update-market-datum.dto';
 
 @Injectable()
 export class MarketDataService {
-  create(createMarketDatumDto: CreateMarketDatumDto) {
-    return 'This action adds a new marketDatum';
+  getPriceAnalysis(data: [number, string][]) {
+    const parsedData = data.map(this.parseCandleStickData);
+    console.log(parsedData);
   }
 
-  findAll() {
-    return `This action returns all marketData`;
-  }
-
-  findOne(id: number) {
-    return `This action returns a #${id} marketDatum`;
-  }
-
-  update(id: number, updateMarketDatumDto: UpdateMarketDatumDto) {
-    return `This action updates a #${id} marketDatum`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} marketDatum`;
+  private parseCandleStickData(candleStick: [number, string]) {
+    return {
+      openTime: new Date(candleStick[0]).toISOString(),
+      openPrice: parseFloat(candleStick[1]),
+    };
   }
 }
