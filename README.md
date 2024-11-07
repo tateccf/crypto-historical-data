@@ -33,8 +33,8 @@ $ npm run test
 Query Params:
 
 - symbol: string!
-- startTime: LONG!
-- endTime: LONG!
+- startTime: LONG! (time in Unix milliseconds)
+- endTime: LONG! ((time in Unix milliseconds))
 
 ### Response:
 
