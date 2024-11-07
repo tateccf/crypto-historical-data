@@ -32,9 +32,9 @@ $ npm run test
 
 Query Params:
 
-symbol: string!
-startTime: LONG!
-endTime: LONG!
+- symbol: string!
+- startTime: LONG!
+- endTime: LONG!
 
 ### Response:
 
